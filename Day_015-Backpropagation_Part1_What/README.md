@@ -31,9 +31,9 @@ We have:
 * **Output layer**: 1 neuron — $( \hat{y} )$
 * **Loss**: MSE (for a single sample):
   
-  $$
-  L = \frac{1}{2}(\hat{y} - y)^2
-  $$
+$$
+L = \frac{1}{2}(\hat{y} - y)^2
+$$
 
 ---
 
@@ -44,62 +44,62 @@ Let the parameters be:
 
 * **Hidden layer weights and biases**
   
-  $$
-  W^{(1)} =
-  \begin{bmatrix}
-  w_{11}^{(1)} & w_{12}^{(1)} \
-  w_{21}^{(1)} & w_{22}^{(1)}
-  \end{bmatrix}, \quad
-  b^{(1)} =
-  \begin{bmatrix}
-  b_1^{(1)} \ b_2^{(1)}
-  \end{bmatrix}
-  $$
+$$
+W^{(1)} =
+\begin{bmatrix}
+w_{11}^{(1)} & w_{12}^{(1)} \
+w_{21}^{(1)} & w_{22}^{(1)}
+\end{bmatrix}, \quad
+b^{(1)} =
+\begin{bmatrix}
+b_1^{(1)} \ b_2^{(1)}
+\end{bmatrix}
+$$
 
   So each hidden neuron:
   > Hidden 1 $O_{11}$
 
-  $$
-  O_{(11)} = w_{11}^{(1)}x_1 + w_{21}^{(1)}x_2 + b_{11}
-  $$
+$$
+O_{(11)} = w_{11}^{(1)}x_1 + w_{21}^{(1)}x_2 + b_{11}
+$$
 
 > Hidden 2 $O_{12}$
 
-  $$
-  O_{(12)} = w_{12}^{(1)}x_1 + w_{22}^{(1)}x_2 + b_{12}
-  $$
+$$
+O_{(12)} = w_{12}^{(1)}x_1 + w_{22}^{(1)}x_2 + b_{12}
+$$
 
 > Final Function
 
-  $$
-  h_j = f(O_j^{(1)})
-  $$
+$$
+h_j = f(O_j^{(1)})
+$$
 
   where $( f(\cdot) )$ is the hidden activation function (e.g., sigmoid, tanh, ReLU).
 
 * **Output layer weights and bias**
   
-  $$
-  W^{(2)} =
-  \begin{bmatrix}
-  w_{1}^{(2)} & w_{2}^{(2)}
-  \end{bmatrix}, \quad
-  b^{(2)} = b^{(2)}
-  $$
+$$
+W^{(2)} =
+\begin{bmatrix}
+w_{1}^{(2)} & w_{2}^{(2)}
+\end{bmatrix}, \quad
+b^{(2)} = b^{(2)}
+$$
 
   Output neuron:
 
-  $$
-  \hat{y} = O_{(21)}
-  $$
+$$
+\hat{y} = O_{(21)}
+$$
 
-  $$
-   O_{(21)} = w_{11}^{(2)}O_{11} + w_{21}^{(2)}O_{12} + b_{(21)}
-  $$
+$$
+  O_{(21)} = w_{11}^{(2)}O_{11} + w_{21}^{(2)}O_{12} + b_{(21)}
+$$
 
-  $$
-  \hat{y} = O_{(21)} \quad \text{(for regression, typically linear activation at output)}
-  $$
+$$
+\hat{y} = O_{(21)} \quad \text{(for regression, typically linear activation at output)}
+$$
 
 ---
 
