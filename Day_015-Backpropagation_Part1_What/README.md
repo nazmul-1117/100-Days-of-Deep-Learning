@@ -30,6 +30,7 @@ We have:
 * **Hidden layer**: 2 neurons — $( h_1, h_2 )$
 * **Output layer**: 1 neuron — $( \hat{y} )$
 * **Loss**: MSE (for a single sample):
+  
   $$
   L = \frac{1}{2}(\hat{y} - y)^2
   $$
@@ -42,6 +43,7 @@ We have:
 Let the parameters be:
 
 * **Hidden layer weights and biases**
+  
   $$
   W^{(1)} =
   \begin{bmatrix}
@@ -56,22 +58,27 @@ Let the parameters be:
 
   So each hidden neuron:
   > Hidden 1 $O_{11}$
+
   $$
   O_{(11)} = w_{11}^{(1)}x_1 + w_{21}^{(1)}x_2 + b_{11}
   $$
 
 > Hidden 2 $O_{12}$
+
   $$
   O_{(12)} = w_{12}^{(1)}x_1 + w_{22}^{(1)}x_2 + b_{12}
   $$
 
 > Final Function
+
   $$
   h_j = f(O_j^{(1)})
   $$
+
   where $( f(\cdot) )$ is the hidden activation function (e.g., sigmoid, tanh, ReLU).
 
 * **Output layer weights and bias**
+  
   $$
   W^{(2)} =
   \begin{bmatrix}
@@ -81,6 +88,7 @@ Let the parameters be:
   $$
 
   Output neuron:
+
   $$
   \hat{y} = O_{(21)}
   $$
@@ -102,35 +110,43 @@ We’ll compute gradients for each parameter.
 ### Step 1: Output Layer Derivatives
 
 > Loss Function
+
 $$
 y = (y - \hat{y})^2
 $$
 
 > Predict Function
+
 $$
 \hat{y} =  w_{11}^{(2)}O_{11} + w_{21}^{(2)}O_{12} + b_{(21)}
 $$
 
 > Derive of Loss Function
+
 $$
 \frac{\partial L}{\partial \hat{y}} = -2 (y - \hat{y})
 $$
 
 > Output Derive Calculate
+
 $$
 \frac{\partial L}{\partial w_{(11)}^{(2)}} = \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial w_{(11)}^{(2)}} 
 $$
+
 $$
  = -2 (y - \hat{y}) \cdot O_{11}
 $$
+
 (since output activation is linear)
 
 So:
+
 $$
 \delta^{(2)} = \hat{y} - y
 $$
 
 Gradients for output layer:
+
 $$
 \frac{\partial L}{\partial w_j^{(2)}} = \delta^{(2)} h_j
 $$
@@ -141,6 +157,7 @@ $$
 
 For output neuron $(O_{21})$,
 > Weight w11
+
 $$
 \frac{\partial L}{\partial w_{(11)}^{(2)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial w_{(11)}^{(2)}} 
 $$
@@ -150,6 +167,7 @@ $$
 $$
 
 > Weight w21
+
 $$
 \frac{\partial L}{\partial w_{(11)}^{(2)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial w_{(21)}^{(2)}} 
 $$
@@ -159,9 +177,11 @@ $$
 $$
 
 > Bias b21
+
 $$
 \frac{\partial L}{\partial b_{(21)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial b_{(21)}} 
 $$
+
 $$
  = -2 (y - \hat{y})
 $$
@@ -174,6 +194,7 @@ $$
 For hidden neuron $( O_{11} )$,
 
 > Weight w11
+
 $$
 \frac{\partial L}{\partial w_{(11)}^{(1)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial O_{(11)}} \cdot \frac{\partial O_{(11)}}{\partial w_{(11)}^{(1)}} 
 $$
@@ -183,6 +204,7 @@ $$
 $$
 
 > Weight w21
+
 $$
 \frac{\partial L}{\partial w_{(11)}^{(1)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial O_{(11)}} \cdot \frac{\partial O_{(11)}}{\partial w_{(21)}^{(1)}} 
 $$
@@ -192,9 +214,11 @@ $$
 $$
 
 > Bias b11
+
 $$
 \frac{\partial L}{\partial b_{(11)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial O_{(11)}} \cdot \frac{\partial O_{(11)}}{\partial b_{(11)}} 
 $$
+
 $$
  = -2 (y - \hat{y}) \cdot  w_{(11)}^{(2)}
 $$
@@ -203,6 +227,7 @@ $$
 % Hidden newron O12
 For hidden neuron $( O_{12} )$,
 > Weight w12
+
 $$
 \frac{\partial L}{\partial w_{(12)}^{(1)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial O_{(12)}} \cdot \frac{\partial O_{(12)}}{\partial w_{(12)}^{(1)}} 
 $$
@@ -212,6 +237,7 @@ $$
 $$
 
 > Weight w22
+
 $$
 \frac{\partial L}{\partial w_{(22)}^{(1)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial O_{(12)}} \cdot \frac{\partial O_{(12)}}{\partial w_{(22)}^{(1)}} 
 $$
@@ -221,9 +247,11 @@ $$
 $$
 
 > Bias b12
+
 $$
 \frac{\partial L}{\partial b_{(12)}} =  \frac{\partial L}{\partial \hat{y}} \cdot \frac{\partial \hat{y}}{\partial O_{(12)}} \cdot \frac{\partial O_{(12)}}{\partial b_{(12)}} 
 $$
+
 $$
  = -2 (y - \hat{y}) \cdot  w_{(21)}^{(2)}
 $$
@@ -238,7 +266,7 @@ $$
 
 ### 1️⃣ Forward Pass
 
-```
+```css
 O_11 = w1_11*x1 + w1_21*x2 + b11
 O_11 = w1_12*x1 + w1_22*x2 + b12
 y_hat = O_11*w2_11 + O_21.w2_12 + b_21 
@@ -246,13 +274,13 @@ y_hat = O_11*w2_11 + O_21.w2_12 + b_21
 
 ### 2️⃣ Compute Loss
 
-```
+```css
 L = (y - y_hat)^2
 ```
 
 ### 3️⃣ Backward Pass
 
-```
+```css
 δ2 = -2 (y - y_hat)
 
 ∂L/∂w1_2 = δ2 * h1
@@ -297,7 +325,7 @@ b <- b - η * (∂L/∂b)
 
 ## 8. Example Pseudocode
 
-```
+```css
 for each epoch:
     for each (x, y) in training_data:
         # Forward pass
