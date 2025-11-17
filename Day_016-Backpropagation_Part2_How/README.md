@@ -43,9 +43,9 @@ $$
 ### Hidden Layer
 
 Parameters:
+
 $$
-W^{(1)} =
-\begin{bmatrix}
+W^{(1)} = \begin{bmatrix}
 w_{11}^{(1)} & w_{12}^{(1)} \
 w_{21}^{(1)} & w_{22}^{(1)}
 \end{bmatrix},
@@ -57,14 +57,17 @@ b_1^{(1)} & b_2^{(1)}
 $$
 
 Hidden pre-activations:
+
 $$
 O_{(11)} = w_{11}^{(1)}x_1 + w_{21}^{(1)}x_2 + b_1^{(1)}
 $$
+
 $$
 O_{(12)} = w_{12}^{(1)}x_1 + w_{22}^{(1)}x_2 + b_2^{(1)}
 $$
 
 Hidden activations:
+
 $$
 h_j = f(O_j^{(1)}) = \sigma(O_j^{(1)}) = \frac{1}{1 + e^{-O_j^{(1)}}}
 $$
@@ -74,6 +77,7 @@ $$
 ### Output Layer
 
 Parameters:
+
 $$
 W^{(2)} =
 \begin{bmatrix}
@@ -84,11 +88,13 @@ b^{(2)} = b^{(2)}
 $$
 
 Output neuron:
+
 $$
 z^{(2)} = w_{1}^{(2)}h_1 + w_{2}^{(2)}h_2 + b^{(2)}
 $$
 
 Predicted output (sigmoid activation):
+
 $$
 \hat{y} = \sigma(z^{(2)}) = \frac{1}{1 + e^{-z^{(2)}}}
 $$
@@ -100,26 +106,31 @@ $$
 ### Step 1: Output Layer Derivatives
 
 Loss function:
+
 $$
 L = -[y \log(\hat{y}) + (1 - y)\log(1 - \hat{y})]
 $$
 
 Derivative of loss w.r.t. output:
+
 $$
 \frac{\partial L}{\partial \hat{y}} = -\frac{y}{\hat{y}} + \frac{1 - y}{1 - \hat{y}}
 $$
 
 Since $\hat{y} = \sigma(z^{(2)})$, we can simplify:
+
 $$
 \frac{\partial L}{\partial z^{(2)}} = \hat{y} - y
 $$
 
 Thus,
+
 $$
 \delta^{(2)} = \hat{y} - y
 $$
 
 Gradients for the output layer:
+
 $$
 \frac{\partial L}{\partial w_j^{(2)}} = \delta^{(2)} \cdot h_j
 $$
@@ -133,19 +144,23 @@ $$
 ### Step 2: Hidden Layer Derivatives
 
 Hidden layer error term (using chain rule):
+
 $$
 \delta_j^{(1)} = (\delta^{(2)} w_j^{(2)}) \cdot f'(O_j^{(1)})
 $$
 
 For sigmoid activation:
+
 $$
 f'(O_j^{(1)}) = h_j(1 - h_j)
 $$
 
 Gradients for hidden layer weights and biases:
+
 $$
 \frac{\partial L}{\partial w_{ij}^{(1)}} = \delta_j^{(1)} \cdot x_i
 $$
+
 $$
 \frac{\partial L}{\partial b_j^{(1)}} = \delta_j^{(1)}
 $$
@@ -415,8 +430,3 @@ class MyBackpropagationNNClassifier:
 ## 🧠 Neural Net Design
 
 ![Neural Network Diagram](assets/Capture.JPG)
-
----
-
-Would you like me to include **a section comparing regression vs classification backpropagation** (to highlight the key mathematical difference between MSE and BCE)?
-It’s a great addition for learners building intuition.
